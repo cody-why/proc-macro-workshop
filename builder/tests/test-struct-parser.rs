@@ -1,3 +1,10 @@
+/*** 
+ * @Author: plucky
+ * @Date: 2022-06-07 07:11:48
+ * @LastEditTime: 2022-07-16 18:53:31
+ * @Description: 
+ */
+
 
 // The std::process::Command builder handles args in a way that is potentially
 // more convenient than passing a full vector of args to the builder all at
@@ -32,7 +39,7 @@
 
 use derive_builder::*;
 
-#[derive(Builder)]
+#[derive(Builder2)]
 pub struct Command {
     executable: String,
     #[builder(each = "arg",default="vec![]")]
@@ -43,13 +50,13 @@ pub struct Command {
 }
 
 fn main() {
-    let command = Command::builder()
-        .executable("cargo".to_owned())
-        .arg("build".to_owned())
-        .arg("--release".to_owned())
-        .build()
-        .unwrap();
+    // let command = Command::builder()
+//         .executable("cargo".to_owned())
+//         .arg("build".to_owned())
+//         .arg("--release".to_owned())
+//         .build()
+//         .unwrap();
 
-    assert_eq!(command.executable, "cargo");
-    assert_eq!(command.args, vec!["build", "--release"]);
+//     assert_eq!(command.executable, "cargo");
+//     assert_eq!(command.args, vec!["build", "--release"]);
 }

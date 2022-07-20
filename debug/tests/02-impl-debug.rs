@@ -1,3 +1,4 @@
+
 // Emit an implementation of std::fmt::Debug for a basic struct with named
 // fields and no generic type parameters.
 //
@@ -30,6 +31,7 @@ fn main() {
     };
 
     let debug = format!("{:?}", f);
+    println!("{}", debug);
 
     assert!(debug.starts_with(r#"Field { name: "F","#));
 }

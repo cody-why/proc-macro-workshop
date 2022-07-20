@@ -1,0 +1,68 @@
+STDOUT:
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+Field {
+    attrs: [],
+    vis: Inherited,
+    ident: Some(
+        Ident {
+            ident: "values",
+            span: #0 bytes(841..847),
+        },
+    ),
+    colon_token: Some(
+        Colon,
+    ),
+    ty: Path(
+        TypePath {
+            qself: None,
+            path: Path {
+                leading_colon: None,
+                segments: [
+                    PathSegment {
+                        ident: Ident {
+                            ident: "Vec",
+                            span: #0 bytes(849..852),
+                        },
+                        arguments: AngleBracketed(
+                            AngleBracketedGenericArguments {
+                                colon2_token: None,
+                                lt_token: Lt,
+                                args: [
+                                    Type(
+                                        Path(
+                                            TypePath {
+                                                qself: None,
+                                                path: Path {
+                                                    leading_colon: None,
+                                                    segments: [
+                                                        PathSegment {
+                                                            ident: Ident {
+                                                                ident: "T",
+                                                                span: #0 bytes(853..854),
+                                                            },
+                                                            arguments: None,
+                                                        },
+                                                        Colon2,
+                                                        PathSegment {
+                                                            ident: Ident {
+                                                                ident: "Value",
+                                                                span: #0 bytes(856..861),
+                                                            },
+                                                            arguments: None,
+                                                        },
+                                                    ],
+                                                },
+                                            },
+                                        ),
+                                    ),
+                                ],
+                                gt_token: Gt,
+                            },
+                        ),
+                    },
+                ],
+            },
+        },
+    ),
+}
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈

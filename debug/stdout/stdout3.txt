@@ -1,0 +1,116 @@
+STDOUT:
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+```
+Field {
+    attrs: [],
+    vis: Inherited,
+    ident: Some(
+        Ident {
+            ident: "name",
+            span: #0 bytes(999..1003),
+        },
+    ),
+    colon_token: Some(
+        Colon,
+    ),
+    ty: Reference(
+        TypeReference {
+            and_token: And,
+            lifetime: Some(
+                Lifetime {
+                    apostrophe: #0 bytes(1006..1013),
+                    ident: Ident {
+                        ident: "static",
+                        span: #0 bytes(1006..1013),
+                    },
+                },
+            ),
+            mutability: None,
+            elem: Path(
+                TypePath {
+                    qself: None,
+                    path: Path {
+                        leading_colon: None,
+                        segments: [
+                            PathSegment {
+                                ident: Ident {
+                                    ident: "str",
+                                    span: #0 bytes(1014..1017),
+                                },
+                                arguments: None,
+                            },
+                        ],
+                    },
+                },
+            ),
+        },
+    ),
+}
+Opts { debug: None }
+Field {
+    attrs: [
+        Attribute {
+            pound_token: Pound,
+            style: Outer,
+            bracket_token: Bracket,
+            path: Path {
+                leading_colon: None,
+                segments: [
+                    PathSegment {
+                        ident: Ident {
+                            ident: "debug",
+                            span: #0 bytes(1025..1030),
+                        },
+                        arguments: None,
+                    },
+                ],
+            },
+            tokens: TokenStream [
+                Punct {
+                    ch: '=',
+                    spacing: Alone,
+                    span: #0 bytes(1031..1032),
+                },
+                Literal {
+                    kind: Str,
+                    symbol: "0b{:08b}",
+                    suffix: None,
+                    span: #0 bytes(1033..1043),
+                },
+            ],
+        },
+    ],
+    vis: Inherited,
+    ident: Some(
+        Ident {
+            ident: "bitmask",
+            span: #0 bytes(1049..1056),
+        },
+    ),
+    colon_token: Some(
+        Colon,
+    ),
+    ty: Path(
+        TypePath {
+            qself: None,
+            path: Path {
+                leading_colon: None,
+                segments: [
+                    PathSegment {
+                        ident: Ident {
+                            ident: "u8",
+                            span: #0 bytes(1058..1060),
+                        },
+                        arguments: None,
+                    },
+                ],
+            },
+        },
+    ),
+}
+Opts { debug: None }
+debug=None
+debug=None
+
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+```

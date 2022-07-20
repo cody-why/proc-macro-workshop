@@ -1,3 +1,4 @@
+
 // Look for a field attribute #[debug = "..."] on each field. If present, find a
 // way to format the field according to the format string given by the caller in
 // the attribute.
@@ -37,8 +38,9 @@ fn main() {
         bitmask: 0b00011100,
     };
 
+    
     let debug = format!("{:?}", f);
     let expected = r#"Field { name: "F", bitmask: 0b00011100 }"#;
-
+    println!("{}", debug);
     assert_eq!(debug, expected);
 }

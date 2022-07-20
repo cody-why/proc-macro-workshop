@@ -1,0 +1,47 @@
+//PhantomData<T>
+```
+ty=Path(
+    TypePath {
+        qself: None,
+        path: Path {
+            leading_colon: None,
+            segments: [
+                PathSegment {
+                    ident: Ident {
+                        ident: "PhantomData",
+                        span: #0 bytes(2981..2992),
+                    },
+                    arguments: AngleBracketed(
+                        AngleBracketedGenericArguments {
+                            colon2_token: None,
+                            lt_token: Lt,
+                            args: [
+                                Type(
+                                    Path(
+                                        TypePath {
+                                            qself: None,
+                                            path: Path {
+                                                leading_colon: None,
+                                                segments: [
+                                                    PathSegment {
+                                                        ident: Ident {
+                                                            ident: "T",
+                                                            span: #0 bytes(2993..2994),
+                                                        },
+                                                        arguments: None,
+                                                    },
+                                                ],
+                                            },
+                                        },
+                                    ),
+                                ),
+                            ],
+                            gt_token: Gt,
+                        },
+                    ),
+                },
+            ],
+        },
+    },
+)
+```

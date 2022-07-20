@@ -1,3 +1,5 @@
+
+
 // Ensure that your macro reports a reasonable error message when the caller
 // mistypes the inert attribute in various ways. This is a compile_fail test.
 //

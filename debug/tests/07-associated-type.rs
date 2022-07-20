@@ -27,7 +27,7 @@ pub trait Trait {
 }
 
 #[derive(CustomDebug)]
-pub struct Field<T: Trait> {
+pub struct Field<T: Trait> where T::Value: Debug {
     values: Vec<T::Value>,
 }
 
@@ -41,5 +41,5 @@ fn main() {
         type Value = u8;
     }
 
-    assert_debug::<Field<Id>>();
+    // assert_debug::<Field<Id>>();
 }
