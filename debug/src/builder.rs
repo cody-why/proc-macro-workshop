@@ -1,7 +1,7 @@
 /*** 
  * @Author: plucky
  * @Date: 2022-07-17 18:14:47
- * @LastEditTime: 2022-07-20 23:53:14
+ * @LastEditTime: 2022-07-21 12:07:00
  * @Description: 
  */
 
@@ -44,7 +44,7 @@ impl BuilderContext {
     pub fn new(input: StructParser) -> Self {
         let fields = input.fields;
         let fields = fields.into_iter().map(|f|{
-             println!("field={:#?}", f);
+            // println!("field={:#?}", f);
             let attr = get_attribute_of_field(&f, "debug");
             // println!("debug={:?}", attr);
             
@@ -75,7 +75,7 @@ impl BuilderContext {
         let generics = self.add_trait_bounds_2();
         
         let (impl_generics, ty_generics, where_clause) = &generics.split_for_impl();
-        // println!("where_clause={:?}", where_clause);
+        println!("where_clause={:?}", where_clause);
        
         quote::quote! {
             //where T:std::fmt::Debug
@@ -115,7 +115,7 @@ fn gen_fields(&self) -> TokenStreamIter {
     })
 }
 
-/// 实现Debug接口
+/// 把所有T泛型增加Debug限定
 // Add a bound `T: Debug` to every type parameter T.
 fn add_trait_bounds_2(&self) -> Generics {
     let mut generics = self.generics.clone();
@@ -136,7 +136,7 @@ fn add_trait_bounds_2(&self) -> Generics {
     });
     
     // 7
-    // TypePathVisitor::get_generic_associated_types(generics: &Generics, fields:&Vec<Field>);
+    let associated_types = get_generic_associated_types(&generics, &self.fields);
     
     // 遍历所有泛型参数,加上Debug限定
     for param in generics.params.iter_mut() {
@@ -144,20 +144,28 @@ fn add_trait_bounds_2(&self) -> Generics {
             // 第5关,如果泛型T是PhantomData类型,而且其他字段的没有用到它,则不需要加上Debug限定
             let name = t.ident.to_string();
             if phantom_vec.contains(&name) && !type_name_vec.contains(&name) {
-                println!("type_name_vec {:?}", name);
-                continue;            
+                // println!("type_name_vec {:?}", name);
+                continue
             }
             // 第7关,如果是关联类型,则需要在where子句中加T::Value的Debug限定,不能在T加限定
-
+            if associated_types.contains_key(&name) && !type_name_vec.contains(&name){
+                continue
+            }
 
             t.bounds.push(syn::parse_quote!(std::fmt::Debug));
 
         }
     }
 
+    // 第7关,如果是关联类型,则需要在where子句中加T::Value的Debug限定
     // 构建where子句
     generics.make_where_clause();
-    
+    for (_, types) in associated_types {
+        for associated_type in types {
+            generics.where_clause.as_mut().unwrap().predicates.push(syn::parse_quote!(#associated_type:std::fmt::Debug));
+        }
+    }
+
     generics
 }
 
@@ -229,7 +237,7 @@ fn get_field_type_name(field: &Field) -> syn::Result<Option<String>> {
     return Ok(None)
 }
 
-/// 取所有泛型参数的关联类型,例如values:Vec<T::Value>, 返回的T::Value就是T的关联类型
+/// 取所有泛型参数的关联类型,例如values:Vec<T::Value>, 返回的T::Value是T的关联类型
 #[allow(dead_code)]
 fn get_generic_associated_types(generics: &Generics, fields:&Vec<Field>) -> HashMap<String, Vec<syn::TypePath>> {
     // 遍历所有泛型参数的名字
