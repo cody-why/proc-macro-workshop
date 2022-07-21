@@ -1,0 +1,46 @@
+STDOUT:
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+attrs=[
+    Attribute {
+        pound_token: Pound,
+        style: Outer,
+        bracket_token: Bracket,
+        path: Path {
+            leading_colon: None,
+            segments: [
+                PathSegment {
+                    ident: Ident {
+                        ident: "debug",
+                        span: #0 bytes(1363..1368),
+                    },
+                    arguments: None,
+                },
+            ],
+        },
+        tokens: TokenStream [
+            Group {
+                delimiter: Parenthesis,
+                stream: TokenStream [
+                    Ident {
+                        ident: "bound",
+                        span: #0 bytes(1369..1374),
+                    },
+                    Punct {
+                        ch: '=',
+                        spacing: Alone,
+                        span: #0 bytes(1375..1376),
+                    },
+                    Literal {
+                        kind: Str,
+                        symbol: "T::Value: Debug",
+                        suffix: None,
+                        span: #0 bytes(1377..1394),
+                    },
+                ],
+                span: #0 bytes(1368..1395),
+            },
+        ],
+    },
+]
+attrs=[]
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈

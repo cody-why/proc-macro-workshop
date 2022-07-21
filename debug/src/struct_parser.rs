@@ -1,7 +1,7 @@
 /*** 
  * @Author: plucky
  * @Date: 2022-07-15 21:42:52
- * @LastEditTime: 2022-07-19 23:50:44
+ * @LastEditTime: 2022-07-21 18:40:49
  * @Description: 
  */
 
@@ -50,16 +50,30 @@ impl Parse for StructParser {
     }
 }
 
-/// Parses a field with attributes. e.q #[debug = "0b{:08b}"]
+/// 从DeriveInput中解析出fields
 #[allow(dead_code)]
-pub fn get_attribute_of_field(field: &syn::Field, name: &str)-> Option<String>{
-    for attr in &field.attrs {
+fn get_fields_by_input(input: syn::DeriveInput)-> Punctuated<Field, Token![,]>{
+    // input.data枚举是Struct(DataStruct)中的fields枚举是Named(FieldsNamed)中的named
+    let fields = match input.data {
+        syn::Data::Struct(syn::DataStruct {
+            fields: syn::Fields::Named(syn::FieldsNamed {named, .. }),
+            ..
+        }) => named,
+        _ => panic!("Only structs are supported"),
+    };
+    fields
+}
+
+/// Meta是NameValue(MetaNameValue)的属性 e.q #[debug = "0b{:08b}"] 取出debug的值
+#[allow(dead_code)]
+pub fn get_attribute_of_field(attrs: &Vec<Attribute>, name: &str)-> Option<String>{
+    for attr in attrs {
         if let Ok(syn::Meta::NameValue(syn::MetaNameValue {
             ref path,
             ref lit,
             ..
         }))=attr.parse_meta() {
-            // debug
+            // e.q 'debug'
             if path.is_ident(name) {
                 if let syn::Lit::Str(ref s) = lit {
                     return Some(s.value());
@@ -73,14 +87,18 @@ pub fn get_attribute_of_field(field: &syn::Field, name: &str)-> Option<String>{
 
 
 #[allow(dead_code)]
-fn get_fields_by_input(input: syn::DeriveInput)-> Punctuated<Field, Token![,]>{
-    // input.data枚举是Struct(DataStruct)中的fields枚举是Named(FieldsNamed)中的named
-    let fields = match input.data {
-        syn::Data::Struct(syn::DataStruct {
-            fields: syn::Fields::Named(syn::FieldsNamed {named, .. }),
-            ..
-        }) => named,
-        _ => panic!("Only structs are supported"),
-    };
-    fields
+/// Meta是List(MetaList)的属性 e.q #[debug(bound = "T::Value: Debug")] 取出bound的值
+pub fn get_attribute_of_struct(attrs: &Vec<Attribute>, name: &str) -> Option<String> {
+    if let Some(attr) = attrs.last() {
+        if let Ok(syn::Meta::List(syn::MetaList { nested, .. })) = attr.parse_meta() {
+            if let Some(syn::NestedMeta::Meta(syn::Meta::NameValue(path_value))) = nested.last() {
+                if path_value.path.is_ident(name) {
+                    if let syn::Lit::Str(ref lit) = path_value.lit {
+                        return Some(lit.value());
+                    }
+                }
+            }
+        }
+    }
+    None
 }

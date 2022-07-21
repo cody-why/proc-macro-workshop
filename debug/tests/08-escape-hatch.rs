@@ -1,3 +1,10 @@
+/*** 
+ * @Author:
+ * @Date: 2022-07-17 17:59:16
+ * @LastEditTime: 2022-07-21 18:18:09
+ * @Description: 
+ */
+
 // There are some cases where no heuristic would be sufficient to infer the
 // right trait bounds based only on the information available during macro
 // expansion.
@@ -36,12 +43,12 @@ pub trait Trait {
 
 #[derive(CustomDebug)]
 #[debug(bound = "T::Value: Debug")]
-pub struct Wrapper<T: Trait> {
+pub struct Wrapper<T: Trait> {//where T::Value: Debug
     field: Field<T>,
 }
 
 #[derive(CustomDebug)]
-struct Field<T: Trait> {
+struct Field<T: Trait>{
     values: Vec<T::Value>,
 }
 

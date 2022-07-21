@@ -1,14 +1,14 @@
 /*** 
  * @Author: plucky
  * @Date: 2022-07-17 18:14:47
- * @LastEditTime: 2022-07-21 12:07:00
+ * @LastEditTime: 2022-07-21 18:18:55
  * @Description: 
  */
 
 use std::{iter::Map, slice::Iter, collections::HashMap};
 
 use proc_macro2::{Ident, TokenStream};
-use syn::{Type, Generics, Path, TypePath, visit::Visit};
+use syn::{Type, Generics, Path, TypePath, visit::Visit, Attribute};
 
 use crate::{struct_parser::*, type_path::TypePathVisitor};
 
@@ -26,32 +26,42 @@ type TokenStreamIter<'a> = Map<Iter<'a, Field>, fn(&'a Field) -> TokenStream>;
 struct Field {
     name: Ident,
     ty: Type,
-    // 属性 #[debug = "arg"]
-    attr: Option<String>,
+    // #[debug = "arg"]
+    format: Option<String>,
+    // #[debug(bound = "T::Value: Debug")]
+    bound: Option<String>,
 }
 
 // lib.rs只写宏定义,builder.rs写宏实现
 pub struct BuilderContext {
-    
+    // 属性 #[debug(bound = "T::Value: Debug")]
+    attrs: Vec<Attribute>,
+    // 结构名字
     name: Ident,
     // fields: Punctuated<Field, Token![,]>,
+    // 泛型
     generics: Generics,
+    // 字段
     fields: Vec<Field>,
 }
 
 impl BuilderContext {
     /// Create a new builder context with Parser.
     pub fn new(input: StructParser) -> Self {
+        // println!("attrs={:#?}", input.attrs);
         let fields = input.fields;
         let fields = fields.into_iter().map(|f|{
             // println!("field={:#?}", f);
-            let attr = get_attribute_of_field(&f, "debug");
-            // println!("debug={:?}", attr);
+            let format = get_attribute_of_field(&f.attrs, "debug");
+            // println!("debug={:?}", format);
+            let bound = get_attribute_of_struct(&f.attrs, "bound");
+            // println!("bound={:?}", bound);
             
             Field {
                 name: f.ident.unwrap(),
                 ty: f.ty,
-                attr,
+                format,
+                bound,
             }
         }).collect();
 
@@ -61,7 +71,7 @@ impl BuilderContext {
             ..input.generics
         };
 
-        Self { name, fields ,generics}
+        Self {attrs:input.attrs, name, fields ,generics}
 
     }
 
@@ -75,7 +85,7 @@ impl BuilderContext {
         let generics = self.add_trait_bounds_2();
         
         let (impl_generics, ty_generics, where_clause) = &generics.split_for_impl();
-        println!("where_clause={:?}", where_clause);
+        // println!("where_clause={:?}", where_clause);
        
         quote::quote! {
             //where T:std::fmt::Debug
@@ -96,13 +106,13 @@ impl BuilderContext {
     }
     
 
-/// 返回一个iter, 相当于: .field("name","F")
+/// 返回一个iter, e.q .field("name","F")
 fn gen_fields(&self) -> TokenStreamIter {
     self.fields.iter().map(|f| {
         let name = &f.name;
         let name_str = name.to_string();
-
-        if let Some(fmt) = &f.attr {
+        // 属性指定格式化
+        if let Some(fmt) = &f.format {
            return quote::quote! {
                 // .field(#name_str, &format_args!("{:?}", self.#name))
                 .field(#name_str, &format_args!(#fmt, self.#name))
@@ -125,6 +135,7 @@ fn add_trait_bounds_2(&self) -> Generics {
     // 结构字段的类型名称
     let mut type_name_vec:Vec<String> = Vec::new();
 
+    let mut bound_map = HashMap::new();
     //遍历所有feild,获取类型的名称和类型是PhantomData的泛型
     self.fields.iter().for_each(|f|{
        if let Some(n) =get_phantom_type(f).unwrap_or(None) {
@@ -133,11 +144,38 @@ fn add_trait_bounds_2(&self) -> Generics {
        if let Some(n) =get_field_type_name(f).unwrap_or(None) {
             type_name_vec.push(n);
        }
+       // 8 bound属性的值
+       if let Some(b) = &f.bound{
+              bound_map.insert(b,());
+       }
+       
     });
     
     // 7
     let associated_types = get_generic_associated_types(&generics, &self.fields);
     
+    // 8 取得bound = "T::Value: Debug"
+    let bound = get_attribute_of_struct(&self.attrs, "bound");
+    if let Some(v) = bound {
+        // 第8关,如果属性指定限定类型,只需要在where子句中加上限定类型即可   
+        generics.make_where_clause();
+        let clause = syn::parse_str(v.as_str()).unwrap();
+        generics.where_clause.as_mut().unwrap().predicates.push(clause);
+        
+        return generics;
+    }
+    
+    bound_map.iter().for_each(|(k,_)|{
+        // 第8关,如果属性指定限定类型,只需要在where子句中加上限定类型即可   
+        generics.make_where_clause();
+        let clause = syn::parse_str(k.as_str()).unwrap();
+        generics.where_clause.as_mut().unwrap().predicates.push(clause);
+        
+    });
+    if !bound_map.is_empty() {
+        return generics;
+    }
+
     // 遍历所有泛型参数,加上Debug限定
     for param in generics.params.iter_mut() {
         if let syn::GenericParam::Type(ref mut t) = param {
@@ -158,11 +196,11 @@ fn add_trait_bounds_2(&self) -> Generics {
     }
 
     // 第7关,如果是关联类型,则需要在where子句中加T::Value的Debug限定
-    // 构建where子句
     generics.make_where_clause();
     for (_, types) in associated_types {
         for associated_type in types {
-            generics.where_clause.as_mut().unwrap().predicates.push(syn::parse_quote!(#associated_type:std::fmt::Debug));
+            let clause = syn::parse_quote!(#associated_type:std::fmt::Debug);
+            generics.where_clause.as_mut().unwrap().predicates.push(clause);
         }
     }
 

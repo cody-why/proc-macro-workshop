@@ -14,7 +14,7 @@ impl fmt::Debug for #name {
 }
 ```
 
-3.实现属性解析和格式化
+3.实现属性解析和指定格式化
 
 ```rust
  .field(#name_str, &format_args!(#fmt, self.#name))
@@ -40,7 +40,7 @@ PhantomData的T不需要加限定
 
 6.除非其他属性用到T,例如:other: T,那么T就要加限定了通
 
-7.提示:Id没有实现Debug.
+7.错误提示:Id没有实现Debug.
 
 例如values: Vec<T::Value>,是关联类型,则需要在where子句中加T::Value的Debug限定,不能在T加限定
 
@@ -63,4 +63,20 @@ impl<T: Trait> Debug for Field `<T>`  where T::Value: Debug,
 
 ```rust
 fn visit_type_path(&mut self, node: &'ast syn::TypePath) {...}
+```
+
+8.错误提示:Id没有实现'Debug',这一关主要是实现属性指定#[debug(bound = "T::Value: Debug")],直接给where加上bound的值
+
+惯例,屏蔽assertas,println!("attrs={:#?}", input.attrs),分析语法树.
+
+```rust
+// 8 取得bound = "T::Value: Debug"
+let bound = get_struct_attr(&self.attrs, "bound");
+if let Some(v) = bound {
+    // 第8关,如果属性指定限定类型,只需要在where子句中加上限定类型即可   
+    generics.make_where_clause();
+    let clause = syn::parse_str(v.as_str()).unwrap();
+    generics.where_clause.as_mut().unwrap().predicates.push(clause);
+    return generics;
+}
 ```
