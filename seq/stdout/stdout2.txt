@@ -1,0 +1,41 @@
+STDOUT:
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+Seq {
+    name: Ident {
+        ident: "N",
+        span: #0 bytes(848..849),
+    },
+    start: LitInt {
+        token: 0,
+    },
+    end: LitInt {
+        token: 4,
+    },
+    body: TokenStream [
+        Ident {
+            ident: "expand_to_nothing",
+            span: #0 bytes(864..881),
+        },
+        Punct {
+            ch: '!',
+            spacing: Alone,
+            span: #0 bytes(881..882),
+        },
+        Group {
+            delimiter: Parenthesis,
+            stream: TokenStream [
+                Ident {
+                    ident: "N",
+                    span: #0 bytes(883..884),
+                },
+            ],
+            span: #0 bytes(882..885),
+        },
+        Punct {
+            ch: ';',
+            spacing: Alone,
+            span: #0 bytes(885..886),
+        },
+    ],
+}
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈

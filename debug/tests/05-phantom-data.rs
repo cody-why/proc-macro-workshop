@@ -1,10 +1,3 @@
-/*** 
- * @Author:
- * @Date: 2022-07-17 17:59:16
- * @LastEditTime: 2022-07-19 23:33:06
- * @Description: 
- */
-
 // Some generic types implement Debug even when their type parameters do not.
 // One example is PhantomData which has this impl:
 //

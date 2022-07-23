@@ -1,0 +1,78 @@
+TDOUT:
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+SeqParser {
+    name: Ident {
+        ident: "N",
+        span: #0 bytes(958..959),
+    },
+    start: 0,
+    end: 4,
+    body: TokenStream [
+        Ident {
+            ident: "compile_error",
+            span: #0 bytes(1004..1017),
+        },
+        Punct {
+            ch: '!',
+            spacing: Alone,
+            span: #0 bytes(1017..1018),
+        },
+        Group {
+            delimiter: Parenthesis,
+            stream: TokenStream [
+                Ident {
+                    ident: "concat",
+                    span: #0 bytes(1019..1025),
+                },
+                Punct {
+                    ch: '!',
+                    spacing: Alone,
+                    span: #0 bytes(1025..1026),
+                },
+                Group {
+                    delimiter: Parenthesis,
+                    stream: TokenStream [
+                        Literal {
+                            kind: Str,
+                            symbol: "error number ",
+                            suffix: None,
+                            span: #0 bytes(1027..1042),
+                        },
+                        Punct {
+                            ch: ',',
+                            spacing: Alone,
+                            span: #0 bytes(1042..1043),
+                        },
+                        Ident {
+                            ident: "stringify",
+                            span: #0 bytes(1044..1053),
+                        },
+                        Punct {
+                            ch: '!',
+                            spacing: Alone,
+                            span: #0 bytes(1053..1054),
+                        },
+                        Group {
+                            delimiter: Parenthesis,
+                            stream: TokenStream [
+                                Ident {
+                                    ident: "N",
+                                    span: #0 bytes(1055..1056),
+                                },
+                            ],
+                            span: #0 bytes(1054..1057),
+                        },
+                    ],
+                    span: #0 bytes(1026..1058),
+                },
+            ],
+            span: #0 bytes(1018..1059),
+        },
+        Punct {
+            ch: ';',
+            spacing: Alone,
+            span: #0 bytes(1059..1060),
+        },
+    ],
+}
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈

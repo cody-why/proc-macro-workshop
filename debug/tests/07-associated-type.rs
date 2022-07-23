@@ -1,10 +1,3 @@
-/*** 
- * @Author: 
- * @Date: 2022-07-17 17:59:16
- * @LastEditTime: 2022-07-21 12:05:00
- * @Description: 
- */
-
 // This test case covers one more heuristic that is often worth incorporating
 // into derive macros that infer trait bounds. Here we look for the use of an
 // associated type of a type parameter.

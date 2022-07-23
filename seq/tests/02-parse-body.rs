@@ -1,3 +1,10 @@
+/*** 
+ * @Author: plucky
+ * @Date: 2022-07-17 17:51:13
+ * @LastEditTime: 2022-07-23 17:19:21
+ * @Description: 
+ */
+
 // The macro invocation in the previous test case contained an empty loop body
 // inside the braces. In reality we want for the macro to accept arbitrary
 // tokens inside the braces.
@@ -18,6 +25,7 @@
 
 use seq::seq;
 
+#[allow(unused)]
 macro_rules! expand_to_nothing {
     ($arg:literal) => {
         // nothing
@@ -25,7 +33,7 @@ macro_rules! expand_to_nothing {
 }
 
 seq!(N in 0..4 {
-    expand_to_nothing!(N);
+    // expand_to_nothing!(N);
 });
 
 fn main() {}

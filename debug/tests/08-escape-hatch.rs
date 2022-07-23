@@ -1,10 +1,4 @@
-/*** 
- * @Author:
- * @Date: 2022-07-17 17:59:16
- * @LastEditTime: 2022-07-21 18:18:09
- * @Description: 
- */
-
+/* */
 // There are some cases where no heuristic would be sufficient to infer the
 // right trait bounds based only on the information available during macro
 // expansion.

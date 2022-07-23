@@ -42,6 +42,7 @@ macro_rules! literal_identity_macro {
 
 // Expands to: `const NPROC: usize = 256;`
 const NPROC: usize = pass_nproc!(literal_identity_macro);
+// const NPROC: usize = literal_identity_macro!(256);
 
 struct Proc;
 
@@ -61,3 +62,4 @@ macro_rules! make_procs_array {
 static PROCS: [Proc; NPROC] = pass_nproc!(make_procs_array);
 
 fn main() {}
+

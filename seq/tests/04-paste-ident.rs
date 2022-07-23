@@ -1,3 +1,5 @@
+
+
 // One of the big things callers will want to do with the sequential indices N
 // is use them as part of an identifier, like f0 f1 f2 etc.
 //
@@ -27,6 +29,12 @@ seq!(N in 1..4 {
         N * 2
     }
 });
+// 测试可选的后缀
+seq!(N in 1..4 {
+    fn f~N~_a () -> u64 {
+        N * 2
+    }
+});
 
 // This f0 is written separately to detect whether your macro correctly starts
 // with the first iteration at N=1 as specified in the invocation. If the macro
@@ -39,6 +47,8 @@ fn f0() -> u64 {
 
 fn main() {
     let sum = f0() + f1() + f2() + f3();
-
+    assert_eq!(sum, 100 + 2 + 4 + 6);
+    // 测试可选的后缀
+    let sum = f0() + f1_a() + f2_a() + f3_a();
     assert_eq!(sum, 100 + 2 + 4 + 6);
 }

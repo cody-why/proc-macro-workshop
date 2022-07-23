@@ -14,5 +14,5 @@ path = "main.rs"
 # bitfield = { path = "bitfield" }
 derive_builder = { path = "builder" }
 derive_debug = { path = "debug" }
-# seq = { path = "seq" }
+seq = { path = "seq" }
 # sorted = { path = "sorted" }
