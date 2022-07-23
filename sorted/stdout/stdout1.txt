@@ -1,0 +1,67 @@
+STDOUT:
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+Enum(
+    ItemEnum {
+        attrs: [],
+        vis: Public(
+            VisPublic {
+                pub_token: Pub,
+            },
+        ),
+        enum_token: Enum,
+        ident: Ident {
+            ident: "Error",
+            span: #0 bytes(740..745),
+        },
+        generics: Generics {
+            lt_token: None,
+            params: [],
+            gt_token: None,
+            where_clause: None,
+        },
+        brace_token: Brace,
+        variants: [
+            Variant {
+                attrs: [],
+                ident: Ident {
+                    ident: "ThatFailed",
+                    span: #0 bytes(752..762),
+                },
+                fields: Unit,
+                discriminant: None,
+            },
+            Comma,
+            Variant {
+                attrs: [],
+                ident: Ident {
+                    ident: "ThisFailed",
+                    span: #0 bytes(768..778),
+                },
+                fields: Unit,
+                discriminant: None,
+            },
+            Comma,
+            Variant {
+                attrs: [],
+                ident: Ident {
+                    ident: "SomethingFailed",
+                    span: #0 bytes(784..799),
+                },
+                fields: Unit,
+                discriminant: None,
+            },
+            Comma,
+            Variant {
+                attrs: [],
+                ident: Ident {
+                    ident: "WhoKnowsWhatFailed",
+                    span: #0 bytes(805..823),
+                },
+                fields: Unit,
+                discriminant: None,
+            },
+            Comma,
+        ],
+    },
+)
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈

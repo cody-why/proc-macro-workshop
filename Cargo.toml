@@ -15,4 +15,4 @@ path = "main.rs"
 derive_builder = { path = "builder" }
 derive_debug = { path = "debug" }
 seq = { path = "seq" }
-# sorted = { path = "sorted" }
+sorted = { path = "sorted" }
