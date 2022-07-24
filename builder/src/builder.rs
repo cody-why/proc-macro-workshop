@@ -138,7 +138,7 @@ impl BuilderContext {
             if let Some(each) = f.attr.each.as_deref(){
                 let (isvec,ty) = get_vec_type(ty);
                 if isvec {
-                    let each = Ident::new(&each, name.span());
+                    let each = Ident::new(each, name.span());
                     return  quote::quote! {
                         pub fn #each(&mut self, v:impl Into<#ty>) ->&mut Self {
                             let mut vec = self.#name.take().unwrap_or_default();
@@ -197,10 +197,9 @@ fn get_inner_type<'a>(ty: &'a Type, name:&str) -> (bool, &'a Type) {
                 // segment.arguments AngleBracketed AngleBracketedGenericArguments args arg Type
                 match &segment.arguments {
                     syn::PathArguments::AngleBracketed(syn::AngleBracketedGenericArguments { args, .. }) => {
-                        if let Some(arg) = args.first() {
-                            if let syn::GenericArgument::Type(ty) = arg {
-                                return (true,ty);
-                            }
+                        if let Some(syn::GenericArgument::Type(ty)) = args.first() {
+                            return (true,ty);
+                            
                         }
                     }
                     _ => {}

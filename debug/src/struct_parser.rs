@@ -88,7 +88,7 @@ pub fn get_attribute_of_field(attrs: &Vec<Attribute>, name: &str)-> Option<Strin
 
 #[allow(dead_code)]
 /// Meta是List(MetaList)的属性 e.q #[debug(bound = "T::Value: Debug")] 取出bound的值
-pub fn get_attribute_of_struct(attrs: &Vec<Attribute>, name: &str) -> Option<String> {
+pub fn get_attribute_of_struct(attrs: &[Attribute], name: &str) -> Option<String> {
     if let Some(attr) = attrs.last() {
         if let Ok(syn::Meta::List(syn::MetaList { nested, .. })) = attr.parse_meta() {
             if let Some(syn::NestedMeta::Meta(syn::Meta::NameValue(path_value))) = nested.last() {

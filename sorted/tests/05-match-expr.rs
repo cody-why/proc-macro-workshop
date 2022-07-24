@@ -88,6 +88,7 @@ impl Display for Error {
             Fmt(e) => write!(f, "{}", e),
         }
     }
+  
 }
 
 fn main() {}

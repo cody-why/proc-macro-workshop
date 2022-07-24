@@ -1,7 +1,7 @@
 /**
  * @Author: plucky
  * @Date: 2022-07-21 20:35:25
- * @LastEditTime: 2022-07-23 19:21:26
+ * @LastEditTime: 2022-07-24 18:47:39
  * @Description: 
  */
 
@@ -84,7 +84,7 @@ impl SeqParser {
             token.extend(self.gen_body(&self.body, i));
 
         }
-        return token;
+        token
 
         // println!("{:#?}", token);
         // "".parse().unwrap()

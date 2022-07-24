@@ -254,12 +254,12 @@ fn get_phantom_type(f: &Field) ->syn::Result<Option<String>> {
 fn get_type_ident<F>(ty: &Type, mut f: F) where F: FnMut(&Ident,&syn::PathArguments) {
     if let Type::Path(TypePath{path:Path{ref segments, ..}, ..}) = &ty {
         if let Some(segment) = segments.first() {
-            match segment {
-                syn::PathSegment{ident, arguments } => {
-                    f(ident, arguments);
-                }
-
+            let syn::PathSegment{ident, arguments } = segment;
+            {
+                f(ident, arguments);
             }
+
+            
         }
     }
 }
@@ -272,7 +272,7 @@ fn get_field_type_name(field: &Field) -> syn::Result<Option<String>> {
             return Ok(Some(ident.to_string()))
         }
     }
-    return Ok(None)
+    Ok(None)
 }
 
 /// 取所有泛型参数的关联类型,例如values:Vec<T::Value>, 返回的T::Value是T的关联类型
@@ -283,7 +283,7 @@ fn get_generic_associated_types(generics: &Generics, fields:&Vec<Field>) -> Hash
         if let syn::GenericParam::Type(ty) = f {
             return Some(ty.ident.to_string())
         }
-        return None
+        None
     }).collect();
 
     
@@ -297,5 +297,5 @@ fn get_generic_associated_types(generics: &Generics, fields:&Vec<Field>) -> Hash
     }
     // input: &syn::DeriveInput
     // visitor.visit_derive_input(input);
-    return visitor.associated_types;
+    visitor.associated_types
 }

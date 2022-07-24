@@ -1,0 +1,231 @@
+STDOUT:
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+ExprMatch {
+    attrs: [
+        Attribute {
+            pound_token: Pound,
+            style: Outer,
+            bracket_token: Bracket,
+            path: Path {
+                leading_colon: None,
+                segments: [
+                    PathSegment {
+                        ident: Ident {
+                            ident: "sorted",
+                            span: #0 bytes(2835..2841),
+                        },
+                        arguments: None,
+                    },
+                ],
+            },
+            tokens: TokenStream [],
+        },
+    ],
+    match_token: Match,
+    expr: Path(
+        ExprPath {
+            attrs: [],
+            qself: None,
+            path: Path {
+                leading_colon: None,
+                segments: [
+                    PathSegment {
+                        ident: Ident {
+                            ident: "self",
+                            span: #0 bytes(2857..2861),
+                        },
+                        arguments: None,
+                    },
+                ],
+            },
+        },
+    ),
+    brace_token: Brace,
+    arms: [
+        Arm {
+            attrs: [],
+            pat: TupleStruct(
+                PatTupleStruct {
+                    attrs: [],
+                    path: Path {
+                        leading_colon: None,
+                        segments: [
+                            PathSegment {
+                                ident: Ident {
+                                    ident: "Io",
+                                    span: #0 bytes(2876..2878),
+                                },
+                                arguments: None,
+                            },
+                        ],
+                    },
+                    pat: PatTuple {
+                        attrs: [],
+                        paren_token: Paren,
+                        elems: [
+                            Ident(
+                                PatIdent {
+                                    attrs: [],
+                                    by_ref: None,
+                                    mutability: None,
+                                    ident: Ident {
+                                        ident: "e",
+                                        span: #0 bytes(2879..2880),
+                                    },
+                                    subpat: None,
+                                },
+                            ),
+                        ],
+                    },
+                },
+            ),
+            guard: None,
+            fat_arrow_token: FatArrow,
+            body: Macro(
+                ExprMacro {
+                    attrs: [],
+                    mac: Macro {
+                        path: Path {
+                            leading_colon: None,
+                            segments: [
+                                PathSegment {
+                                    ident: Ident {
+                                        ident: "write",
+                                        span: #0 bytes(2885..2890),
+                                    },
+                                    arguments: None,
+                                },
+                            ],
+                        },
+                        bang_token: Bang,
+                        delimiter: Paren(
+                            Paren,
+                        ),
+                        tokens: TokenStream [
+                            Ident {
+                                ident: "f",
+                                span: #0 bytes(2892..2893),
+                            },
+                            Punct {
+                                ch: ',',
+                                spacing: Alone,
+                                span: #0 bytes(2893..2894),
+                            },
+                            Literal {
+                                kind: Str,
+                                symbol: "{}",
+                                suffix: None,
+                                span: #0 bytes(2895..2899),
+                            },
+                            Punct {
+                                ch: ',',
+                                spacing: Alone,
+                                span: #0 bytes(2899..2900),
+                            },
+                            Ident {
+                                ident: "e",
+                                span: #0 bytes(2901..2902),
+                            },
+                        ],
+                    },
+                },
+            ),
+            comma: Some(
+                Comma,
+            ),
+        },
+        Arm {
+            attrs: [],
+            pat: TupleStruct(
+                PatTupleStruct {
+                    attrs: [],
+                    path: Path {
+                        leading_colon: None,
+                        segments: [
+                            PathSegment {
+                                ident: Ident {
+                                    ident: "Fmt",
+                                    span: #0 bytes(2917..2920),
+                                },
+                                arguments: None,
+                            },
+                        ],
+                    },
+                    pat: PatTuple {
+                        attrs: [],
+                        paren_token: Paren,
+                        elems: [
+                            Ident(
+                                PatIdent {
+                                    attrs: [],
+                                    by_ref: None,
+                                    mutability: None,
+                                    ident: Ident {
+                                        ident: "e",
+                                        span: #0 bytes(2921..2922),
+                                    },
+                                    subpat: None,
+                                },
+                            ),
+                        ],
+                    },
+                },
+            ),
+            guard: None,
+            fat_arrow_token: FatArrow,
+            body: Macro(
+                ExprMacro {
+                    attrs: [],
+                    mac: Macro {
+                        path: Path {
+                            leading_colon: None,
+                            segments: [
+                                PathSegment {
+                                    ident: Ident {
+                                        ident: "write",
+                                        span: #0 bytes(2927..2932),
+                                    },
+                                    arguments: None,
+                                },
+                            ],
+                        },
+                        bang_token: Bang,
+                        delimiter: Paren(
+                            Paren,
+                        ),
+                        tokens: TokenStream [
+                            Ident {
+                                ident: "f",
+                                span: #0 bytes(2934..2935),
+                            },
+                            Punct {
+                                ch: ',',
+                                spacing: Alone,
+                                span: #0 bytes(2935..2936),
+                            },
+                            Literal {
+                                kind: Str,
+                                symbol: "{}",
+                                suffix: None,
+                                span: #0 bytes(2937..2941),
+                            },
+                            Punct {
+                                ch: ',',
+                                spacing: Alone,
+                                span: #0 bytes(2941..2942),
+                            },
+                            Ident {
+                                ident: "e",
+                                span: #0 bytes(2943..2944),
+                            },
+                        ],
+                    },
+                },
+            ),
+            comma: Some(
+                Comma,
+            ),
+        },
+    ],
+}
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈

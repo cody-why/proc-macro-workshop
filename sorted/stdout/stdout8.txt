@@ -1,0 +1,131 @@
+STDOUT:
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+ExprMatch {
+    attrs: [
+        Attribute {
+            pound_token: Pound,
+            style: Outer,
+            bracket_token: Bracket,
+            path: Path {
+                leading_colon: None,
+                segments: [
+                    PathSegment {
+                        ident: Ident {
+                            ident: "sorted",
+                            span: #0 bytes(466..472),
+                        },
+                        arguments: None,
+                    },
+                ],
+            },
+            tokens: TokenStream [],
+        },
+    ],
+    match_token: Match,
+    expr: Path(
+        ExprPath {
+            attrs: [],
+            qself: None,
+            path: Path {
+                leading_colon: None,
+                segments: [
+                    PathSegment {
+                        ident: Ident {
+                            ident: "self",
+                            span: #0 bytes(488..492),
+                        },
+                        arguments: None,
+                    },
+                ],
+            },
+        },
+    ),
+    brace_token: Brace,
+    arms: [
+        Arm {
+            attrs: [],
+            pat: Ident(
+                PatIdent {
+                    attrs: [],
+                    by_ref: None,
+                    mutability: None,
+                    ident: Ident {
+                        ident: "RustFest",
+                        span: #0 bytes(507..515),
+                    },
+                    subpat: None,
+                },
+            ),
+            guard: None,
+            fat_arrow_token: FatArrow,
+            body: Lit(
+                ExprLit {
+                    attrs: [],
+                    lit: Str(
+                        LitStr {
+                            token: "Europe",
+                        },
+                    ),
+                },
+            ),
+            comma: Some(
+                Comma,
+            ),
+        },
+        Arm {
+            attrs: [],
+            pat: Ident(
+                PatIdent {
+                    attrs: [],
+                    by_ref: None,
+                    mutability: None,
+                    ident: Ident {
+                        ident: "RustLatam",
+                        span: #0 bytes(541..550),
+                    },
+                    subpat: None,
+                },
+            ),
+            guard: None,
+            fat_arrow_token: FatArrow,
+            body: Lit(
+                ExprLit {
+                    attrs: [],
+                    lit: Str(
+                        LitStr {
+                            token: "Latin America",
+                        },
+                    ),
+                },
+            ),
+            comma: Some(
+                Comma,
+            ),
+        },
+        Arm {
+            attrs: [],
+            pat: Wild(
+                PatWild {
+                    attrs: [],
+                    underscore_token: Underscore,
+                },
+            ),
+            guard: None,
+            fat_arrow_token: FatArrow,
+            body: Lit(
+                ExprLit {
+                    attrs: [],
+                    lit: Str(
+                        LitStr {
+                            token: "elsewhere",
+                        },
+                    ),
+                },
+            ),
+            comma: Some(
+                Comma,
+            ),
+        },
+    ],
+}
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
