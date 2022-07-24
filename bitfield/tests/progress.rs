@@ -1,7 +1,14 @@
+/**
+ * @Author: 
+ * @Date: 2022-07-17 17:51:13
+ * @LastEditTime: 2022-07-24 19:12:35
+ * @Description: 
+ */
+
 #[test]
 fn tests() {
     let t = trybuild::TestCases::new();
-    //t.pass("tests/01-specifier-types.rs");
+    t.pass("tests/01-specifier-types.rs");
     //t.pass("tests/02-storage.rs");
     //t.pass("tests/03-accessors.rs");
     //t.compile_fail("tests/04-multiple-of-8bits.rs");

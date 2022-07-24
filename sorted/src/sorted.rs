@@ -2,13 +2,15 @@
 /**
  * @Author: plucky
  * @Date: 2022-07-23 19:34:46
- * @LastEditTime: 2022-07-24 18:45:40
+ * @LastEditTime: 2022-07-24 21:19:10
  * @Description: 
  */
 
 
 use proc_macro2::TokenStream;
 use proc_macro2::Span;
+use proc_macro_error::abort;
+
 use quote::ToTokens;
 use syn::visit_mut::VisitMut;
 
@@ -107,18 +109,6 @@ impl Check {
     fn check_sort_arms(&mut self, node: &mut syn::ExprMatch){
            let mut sorted = node.arms.clone();
 
-           // 检查有没有不支持的类型
-           for a in node.arms.iter() {
-                match  get_pat_path(a){
-                    Ok(_) => {},
-                    Err(e) => {
-                        self.err = Some(e);
-                        return;
-                    },
-                }
-               
-           }
-
            // 排序arm
             sorted.sort_by(|a, b|{
                 let a_str = get_pat_path(a).unwrap();
@@ -170,7 +160,8 @@ fn get_pat_path(arm: &syn::Arm) -> syn::Result<String> {
         // syn::Pat::Type(_) => todo!(),
         // syn::Pat::Verbatim(_) => todo!(),
         syn::Pat::Wild(_) => "_".to_string(),
-        _ => return Err(syn::Error::new_spanned(&arm.pat, "unsupported by #[sorted]"))
+        //_ => return Err(syn::Error::new_spanned(&arm.pat, "unsupported by #[sorted]"))
+        _=> abort!(&arm.pat, "unsupported by #[sorted]"),
     };
     Ok(r)
     

@@ -8,6 +8,7 @@
 mod sorted;
 
 use proc_macro::TokenStream;
+use proc_macro_error::proc_macro_error;
 use quote::ToTokens;
 use sorted::{Sorted, Check};
 use syn::parse_macro_input;
@@ -33,6 +34,7 @@ pub fn sorted(args: TokenStream, input: TokenStream) -> TokenStream {
         
 }
 
+#[proc_macro_error]
 #[proc_macro_attribute]
 pub fn check(_args: TokenStream, input: TokenStream) -> TokenStream {
     // 这个过程宏的目标是函数
