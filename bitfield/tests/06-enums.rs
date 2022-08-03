@@ -85,7 +85,10 @@ fn main() {
 
     entry.set_acknowledged(true);
     entry.set_delivery_mode(DeliveryMode::SMI);
+    entry.set_trigger_mode(TriggerMode::Level);
+    entry.get_acknowledged();
     assert_eq!(entry.get_acknowledged(), true);
-    assert_eq!(entry.get_trigger_mode(), TriggerMode::Edge);
+    assert_eq!(entry.get_trigger_mode(), TriggerMode::Level);
     assert_eq!(entry.get_delivery_mode(), DeliveryMode::SMI);
+    // println!("{:?}", entry.get_delivery_mode());
 }

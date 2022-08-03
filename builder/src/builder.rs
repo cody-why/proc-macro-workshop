@@ -2,6 +2,7 @@ use std::{iter::Map, slice::Iter};
 
 use darling::{FromField};
 use proc_macro2::{TokenStream, Ident};
+use quote::format_ident;
 use syn::{ DeriveInput, Type};
 
 type TokenStreamIter<'a> = Map<Iter<'a, Field>, fn(&'a Field) -> TokenStream>;
@@ -72,8 +73,8 @@ impl BuilderContext {
         // 输入的结构:Command
         let name = &self.name;
         // 辅助结构:CommandBuilder,用于生成Command
-        let builder_name = Ident::new(&format!("{}Builder", name), name.span());
-        
+        // let builder_name = Ident::new(&format!("{}Builder", name), name.span());
+        let builder_name = format_ident!("{}Builder", name);
 
         // 属性: executable: Option<String>,
         let fields = self.gen_fields();

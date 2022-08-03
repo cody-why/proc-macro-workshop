@@ -1,7 +1,7 @@
 /**
  * @Author: plucky
  * @Date: 2022-07-21 20:35:25
- * @LastEditTime: 2022-07-24 18:47:39
+ * @LastEditTime: 2022-07-27 20:08:07
  * @Description: 
  */
 
@@ -9,7 +9,7 @@ use proc_macro2::{TokenStream, TokenTree};
 use syn::parse::{Parse, ParseStream, Result};
 
 use syn::{Ident, Token, LitInt};
-use quote::quote;
+use quote::{quote};
 
 /// A parser for the `seq` macro.
 #[derive(Debug)]

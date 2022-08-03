@@ -39,7 +39,7 @@ pub enum DeliveryMode {
 
 fn main() {
     assert_eq!(std::mem::size_of::<RedirectionTableEntry>(), 1);
-
+    println!("{:?}", DeliveryMode::Startup as usize);//1
     // Initialized to all 0 bits.
     let mut entry = RedirectionTableEntry::new();
     assert_eq!(entry.get_delivery_mode(), DeliveryMode::Init);

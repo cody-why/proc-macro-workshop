@@ -33,8 +33,7 @@ pub fn sorted(args: TokenStream, input: TokenStream) -> TokenStream {
 - 遍历函数体寻找匹配表达式。这部分可以使用 Syn 的 VisitMut 特征并编写访问者，
 则最简单使用 visit_expr_match_mut 方法。
 
-- 对于每个匹配表达式，确定它是否有 #[sorted]。如果是，请检查match语句块是否已排序并删除
-属性列表中的 #[sorted] 属性。
+- 对于每个匹配表达式，确定它是否有 #[sorted]。如果是，请检查match语句块是否已排序并删除属性列表中的 #[sorted] 属性。
 
 * 打开提示网址See the module documentation for details.有example
 * Syn的VisitMut 需要feature "visit-mut"
