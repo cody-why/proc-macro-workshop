@@ -11,6 +11,7 @@ name = "workshop"
 path = "main.rs"
 
 [dependencies]
+syn = "1"
 bitfield = { path = "bitfield" }
 derive_builder = { path = "builder" }
 derive_debug = { path = "debug" }

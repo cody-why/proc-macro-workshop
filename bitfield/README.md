@@ -60,4 +60,6 @@ type InOut; // 输入输出参数类型
 * 判断枚举范围不是 0..2^BITS 无法编译
 * 因为enum DeliveryMode 有8个成员,计算得到8位bit,如果第一个成员值从1开始,8位无法放得下,所以不符合CheckDiscriminantInRange特征
 
+10. 
+* 增加 #[bits = 1] 指示属性的位数
 

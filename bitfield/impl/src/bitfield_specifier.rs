@@ -1,7 +1,7 @@
 /**
  * @Author: plucky
  * @Date: 2022-08-01 16:10:47
- * @LastEditTime: 2022-08-03 20:58:31
+ * @LastEditTime: 2022-08-10 16:27:14
  * @Description: 
  */
 
@@ -21,6 +21,7 @@ pub fn derive(input: TokenStream) -> TokenStream {
     let mut from_bytes_arms = Vec::new();
     let mut discriminant_in_range_check = Vec::new();
     if let syn::Data::Enum(syn::DataEnum{ref variants,..}) = input.data{
+        // 数值转枚举
         from_bytes_arms = variants.iter().map(|variant|{
           let ident = &variant.ident;
           //_x if _x == MyEnum::A as i32 => MyEnum::A,
@@ -57,7 +58,7 @@ pub fn derive(input: TokenStream) -> TokenStream {
           let ident = &variant.ident;
           let span = ident.span();
           quote::quote_spanned!(span => 
-            impl ::bitfield::check::CheckDiscriminantInRange<[(); Self::#ident as usize]> for #name{
+            impl crate::check::CheckDiscriminantInRange<[(); Self::#ident as usize]> for #name{
               type CheckType = [(); ((Self::#ident as usize) < (0x01_usize << #bits)) as usize];
             }
           )

@@ -1,7 +1,7 @@
 /*** 
  * @Author: plucky
  * @Date: 2022-07-15 21:42:52
- * @LastEditTime: 2022-07-21 18:40:49
+ * @LastEditTime: 2022-09-05 22:57:05
  * @Description: 
  */
 
@@ -64,9 +64,10 @@ fn get_fields_by_input(input: syn::DeriveInput)-> Punctuated<Field, Token![,]>{
     fields
 }
 
-/// Meta是NameValue(MetaNameValue)的属性 e.q #[debug = "0b{:08b}"] 取出debug的值
+/// #[debug = "0b{:08b}"] 取出debug的值
 #[allow(dead_code)]
 pub fn get_attribute_of_field(attrs: &Vec<Attribute>, name: &str)-> Option<String>{
+    // Meta是NameValue(MetaNameValue)的属性
     for attr in attrs {
         if let Ok(syn::Meta::NameValue(syn::MetaNameValue {
             ref path,

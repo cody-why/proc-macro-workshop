@@ -1,7 +1,7 @@
 /** 
  * @Author: plucky
  * @Date: 2022-07-24 22:33:33
- * @LastEditTime: 2022-08-03 22:21:44
+ * @LastEditTime: 2022-08-10 15:47:44
  * @Description: 
  */
 
@@ -26,14 +26,7 @@ pub fn expand(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
     // "".parse().unwrap()
 }
 
-// 实现类似这样的trait
-// pub trait Specifier {
-//     const BITS: usize;
-// }
-// enum B24 {}
-// impl Specifier for B24 {
-//     const BITS: usize = 24;
-// }
+// 实现B1到B32的枚举
 fn gen_enum_bits() -> TokenStream {
     // B1..B32
     let iter = (1..=32usize).into_iter().map(|i|{
