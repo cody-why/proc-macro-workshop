@@ -176,39 +176,34 @@ impl BuilderContext {
 
 
 #[allow(dead_code)]
-/// 取Option的值的类型,返回是否Option,值的类型
-fn get_option_type(ty: &Type) -> (bool, & Type){
+/// 取Option的值的类型,返回(是否Option,值的类型)
+pub fn get_option_type(ty: &Type) -> (bool, &Type){
     get_inner_type(ty, "Option")
 }
 
 #[allow(dead_code)]
-/// 取Vec的值的类型,返回是否Vec,值的类型
-fn get_vec_type(ty: &Type) -> (bool, &Type){
+/// 取Vec的值的类型,返回(是否Vec,值的类型)
+pub fn get_vec_type(ty: &Type) -> (bool, &Type){
     get_inner_type(ty, "Vec")
 }
 
 
 /// 取出inner的类型,比如:Option<String>,Vec<String>,取出String.
-/// 返回是否inner,inner的类型
+/// 返回(是否inner,inner的类型)
 fn get_inner_type<'a>(ty: &'a Type, name:&str) -> (bool, &'a Type) {
-    // 匹配 Path TypePath{ path:Path {segments[0] .ident="Option"
-    if let Type::Path(syn::TypePath { path:syn::Path { segments, .. }, .. }) = ty {
-        if let Some(segment) = segments.first() {
+    // 匹配 syn::Type::Path(ref path) {segments[0].ident="Option"}
+    if let syn::Type::Path(ref path) = ty{
+        if let Some(segment) = path.path.segments.first() {
             if segment.ident == name {
-                // segment.arguments AngleBracketed AngleBracketedGenericArguments args arg Type
-                match &segment.arguments {
-                    syn::PathArguments::AngleBracketed(syn::AngleBracketedGenericArguments { args, .. }) => {
-                        if let Some(syn::GenericArgument::Type(ty)) = args.first() {
-                            return (true,ty);
-                            
-                        }
+                if let syn::PathArguments::AngleBracketed(syn::AngleBracketedGenericArguments { args, .. }) = &segment.arguments {
+                    if let Some(syn::GenericArgument::Type(ty)) = args.first() {
+                        return (true, ty);
+                        
                     }
-                    _ => {}
-                
                 }
 
             }
         }
     }
-    (false,ty)
+    (false, ty)
 }
